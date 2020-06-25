@@ -1,19 +1,30 @@
+
 CC=clang
 OPTS=-o2 -Wall
+
 INC=$(shell pwd)
 OBJS= etc/convert.o etc/dump.o etc/sconvert.o rply.o
 
-all: lib/ obj/ rply.a
+AR=ar -rcs
+RM=rm -rf
+MKDIR=mkdir -p
+
+LIB_DIR=lib
+OBJ_DIR=obj
+
+OUT_LIB=rply.a
+
+all: $(LIB_DIR)/ $(OBJ_DIR)/ $(OUT_LIB)
 
 rply.a: $(OBJS)
-	ar rcs lib/$@ obj/*.o
+	$(AR) $(LIB_DIR)/$@ $(OBJ_DIR)/*.o
 	
 %.o : %.c
-	$(CC) -c $(OPTS) $< -o obj/$(notdir $@) -I$(INC)
+	$(CC) -c $(OPTS) $< -o $(OBJ_DIR)/$(notdir $@) -I$(INC)
 	
 clean:
-	rm -rf obj
-	rm -rf lib
+	$(RM) $(OBJ_DIR)
+	$(RM) $(LIB_DIR)
 
 %/:
-	mkdir -p $@
+	$(MKDIR) $@
