@@ -3,7 +3,7 @@ OPTS=-o2 -Wall
 INC=$(shell pwd)
 OBJS= etc/convert.o etc/dump.o etc/sconvert.o rply.o
 
-all: rply.a
+all: lib/ obj/ rply.a
 
 rply.a: $(OBJS)
 	ar rcs lib/$@ obj/*.o
@@ -12,5 +12,8 @@ rply.a: $(OBJS)
 	$(CC) -c $(OPTS) $< -o obj/$(notdir $@) -I$(INC)
 	
 clean:
-	rm -f obj/*.o
-	rm -f lib/*.a
+	rm -rf obj
+	rm -rf lib
+
+%/:
+	mkdir -p $@
