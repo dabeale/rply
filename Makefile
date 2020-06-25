@@ -1,6 +1,6 @@
 
 CC=clang
-OPTS=-o2 -Wall
+OPTS=-o2 
 
 INC=$(shell pwd)
 OBJS= etc/convert.o etc/dump.o etc/sconvert.o rply.o
@@ -12,11 +12,11 @@ MKDIR=mkdir -p
 LIB_DIR=lib
 OBJ_DIR=obj
 
-OUT_LIB=rply.a
+OUT_LIB=librply.a
 
 all: $(LIB_DIR)/ $(OBJ_DIR)/ $(OUT_LIB)
 
-rply.a: $(OBJS)
+$(OUT_LIB): $(OBJS)
 	$(AR) $(LIB_DIR)/$@ $(OBJ_DIR)/*.o
 	
 %.o : %.c
