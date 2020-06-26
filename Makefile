@@ -1,6 +1,6 @@
 
 CC=clang
-OPTS=-o2 
+OPTS=-o2 -fPIC
 
 INC=$(shell pwd)
 OBJS= etc/convert.o etc/dump.o etc/sconvert.o rply.o
