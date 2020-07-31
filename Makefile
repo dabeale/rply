@@ -14,17 +14,20 @@ OBJ_DIR=obj
 
 OUT_LIB=librply.a
 
-all: $(LIB_DIR)/ $(OBJ_DIR)/ $(OUT_LIB)
+all: $(OBJ_DIR) $(OUT_LIB)
 
 $(OUT_LIB): $(OBJS)
+	$(MKDIR) $(LIB_DIR)
 	$(AR) $(LIB_DIR)/$@ $(OBJ_DIR)/*.o
 	
 %.o : %.c
+	$(MKDIR) $(dir $@)
 	$(CC) -c $(OPTS) $< -o $(OBJ_DIR)/$(notdir $@) -I$(INC)
+	
+$(OBJ_DIR):
+	$(MKDIR) $@
 	
 clean:
 	$(RM) $(OBJ_DIR)
 	$(RM) $(LIB_DIR)
 
-%/:
-	$(MKDIR) $@
