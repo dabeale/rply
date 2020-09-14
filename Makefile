@@ -1,5 +1,4 @@
 
-CC=clang
 OPTS=-o2 -fPIC
 
 INC=$(shell pwd)
